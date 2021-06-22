@@ -60,9 +60,10 @@ Now we can spin up the set-up by `docker-compose up -d`. If the database is huge
 *Fogger* gives you three CLI commands:
 
 * `docker-compose run --rm fogger fogger:init` will connect to your source database and prepare a boilerplate configuration file with the information on tables and columns in your database. This configuration file is a place where you define which column should be masked (and how) and which tables should be subsetted. See [example config file](Example config file).
-* `docker-compose run --rm fogger fogger:run` is the core command that will orchestrate the copying, masking and subsetting of data. The actual copying will be done by background worker that can scale horizontally. Before `run` is executed, make sure that the config file has been modified to your needs. Available subset and mask strategies has been described below. 
+* `docker-compose run --rm fogger fogger:run -f lotu_fogger.yaml -c 500` is the core command that will orchestrate the copying, masking and subsetting of data. The actual copying will be done by background worker that can scale horizontally. Before `run` is executed, make sure that the config file has been modified to your needs. Available subset and mask strategies has been described below. 
 * `docker-compose run --rm fogger fogger:finish` will recreate indexes, refine database so that all the foreign key constraints are still valid, and then recreate them as well. This command runs automatically after run so you need to execute it only when you have stopped the `run` command with `ctrl-c`.
-* it's done - the masked and subsetted data are in a target database. You can do whatever you please with it. For example: `docker-compose exec target /usr/bin/mysqldump -u user --password=pass target > target.sql` will save the dump of masked database in your filesystem.           
+* it's done - the masked and subsetted data are in a target database. You can do whatever you please with it. For example: `docker-compose exec target /usr/bin/mysqldump -u user --password=pass --no-tablespaces  target > target.sql` will save the dump of masked database in your filesystem.           
+* clean mysqldump errors `grep -v 'mysqldump: ' target.sql > clean.sql`
 
 ### Example config file
 

@@ -5,10 +5,10 @@ parameters:
     # You should not need to change this value.
     env(DATABASE_URL): ''
     env(CHARSET): 'utf8'
-    env(COLLATE): 'utf8_general_ci'
+    env(COLLATE): 'utf8_swedish_ci'
     env(REDIS_URL): 'redis://redis'
     env(REDIS_MESSAGE_URL): 'redis://redis'
-    env(FAKER_LOCALE): 'en_GB'
+    env(FAKER_LOCALE): 'fi_FI'
     charset: '%env(CHARSET)%'
     collate: '%env(COLLATE)%'
     faker_locale: '%env(FAKER_LOCALE)%'
@@ -22,16 +22,22 @@ doctrine:
         default_connection: source
         connections:
             source:
+                server_version: 5.7
                 url: '%env(resolve:SOURCE_DATABASE_URL)%'
                 options:
                     !php/const PDO::MYSQL_ATTR_USE_BUFFERED_QUERY: 0
                     charset: '%env(resolve:CHARSET)%'
                     collate: '%env(resolve:COLLATE)%'
                     !php/const PDO::MYSQL_ATTR_INIT_COMMAND: '%env(resolve:MYSQL_ATTR_INIT_COMMAND)%'
+                mapping_types:
+                    bit: boolean
             target:
+                server_version: 5.7
+                url: '%env(resolve:TARGET_DATABASE_URL)%'
                 options:
                     !php/const PDO::MYSQL_ATTR_LOCAL_INFILE: 1
                     charset: '%env(resolve:CHARSET)%'
                     collate: '%env(resolve:COLLATE)%'
                     !php/const PDO::MYSQL_ATTR_INIT_COMMAND: '%env(resolve:MYSQL_ATTR_INIT_COMMAND)%'
-                url: '%env(resolve:TARGET_DATABASE_URL)%'
+                mapping_types:
+                    bit: boolean

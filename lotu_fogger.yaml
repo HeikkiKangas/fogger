@@ -1,0 +1,112 @@
+tables:
+  applicant:
+    columns:
+      streetAddress: { maskStrategy: faker, options: { method: "streetAddress" } }
+      email: { maskStrategy: faker, options: { method: "safeEmail" } }
+      firstName: { maskStrategy: faker, options: { method: "firstName" } }
+      lastName: { maskStrategy: faker, options: { method: "lastName" } }
+      personId: { maskStrategy: faker, options: { method: "personalIdentityNumber" } }
+      phone1: { maskStrategy: faker, options: { method: "phoneNumber" } }
+      phone2: { maskStrategy: faker, options: { method: "phoneNumber" } }
+    subsetStrategy: null
+    subsetOptions: {}
+  application:
+    columns:
+      billingNotes: { maskStrategy: faker, options: { method: "sentence", arguments: [3, true] } }
+      economicArguments: { maskStrategy: faker, options: { method: "sentence" } }
+      friendName: { maskStrategy: faker, options: { method: "name" } }
+      handlerNotes: { maskStrategy: faker, options: { method: "sentence" } }
+      healthArguments: { maskStrategy: faker, options: { method: "sentence" } }
+      information: { maskStrategy: faker, options: { method: "sentence", arguments: [3, true] } }
+      otherArguments: { maskStrategy: faker, options: { method: "sentence", arguments: [5, true] } }
+      socialArguments: { maskStrategy: faker, options: { method: "sentence" } }
+    subsetStrategy: null
+    subsetOptions: {}
+  bill:
+    columns:
+      description: { maskStrategy: starify, options: {} }
+      handlerNotes: { maskStrategy: faker, options: { method: "sentence" } }
+      accountNumberForReturns: { maskStrategy: faker, options: { method: "iban" } }
+      streetAddress: { maskStrategy: faker, options: { method: "streetAddress" } }
+      email: { maskStrategy: faker, options: { method: "safeEmail" } }
+      name: { maskStrategy: faker, options: { method: "name" } }
+      phone: { maskStrategy: faker, options: { method: "phoneNumber" } }
+    subsetStrategy: null
+    subsetOptions: {}
+  billable:
+    columns:
+      accountNumberForReturns: { maskStrategy: faker, options: { method: "iban" } }
+      streetAddress: { maskStrategy: faker, options: { method: "streetAddress" } }
+      email: { maskStrategy: faker, options: { method: "safeEmail" } }
+      name: { maskStrategy: faker, options: { method: "company" } }
+      phone: { maskStrategy: faker, options: { method: "phoneNumber" } }
+      description: { maskStrategy: starify, options: {} }
+    subsetStrategy: null
+    subsetOptions: {}
+  brochure_subscription:
+    columns:
+      streetAddress: { maskStrategy: faker, options: { method: "streetAddress" } }
+      name: { maskStrategy: faker, options: { method: "name" } }
+      receiver: { maskStrategy: faker, options: { method: "company" } }
+    subsetStrategy: null
+    subsetOptions: {}
+  customer:
+    columns:
+      handlerNotes: { maskStrategy: faker, options: { method: "sentence" } }
+      aids: { maskStrategy: starify, options: {} }
+      streetAddress: { maskStrategy: faker, options: { method: "streetAddress" } }
+      diets: { maskStrategy: starify, options: {} }
+      email: { maskStrategy: faker, options: { method: "safeEmail" } }
+      firstName: { maskStrategy: faker, options: { method: "firstName" } }
+      lastName: { maskStrategy: faker, options: { method: "lastName" } }
+      personId: { maskStrategy: faker, options: { method: "personalIdentityNumber" } }
+      phone1: { maskStrategy: faker, options: { method: "phoneNumber" } }
+      phone2: { maskStrategy: faker, options: { method: "phoneNumber" } }
+    subsetStrategy: null
+    subsetOptions: {}
+  expense:
+    columns:
+      description: { maskStrategy: faker, options: { method: "sentence", arguments: [3, true] } }
+    subsetStrategy: null
+    subsetOptions: {}
+  last_holiday:
+    columns:
+      personId: { maskStrategy: faker, options: { method: "personalIdentityNumber" } }
+    subsetStrategy: null
+    subsetOptions: {}
+  mailing:
+    columns:
+      addressee: { maskStrategy: faker, options: { method: "name" } }
+      streetAddress: { maskStrategy: faker, options: { method: "streetAddress" } }
+      emailAddress: { maskStrategy: faker, options: { method: "safeEmail" } }
+      optionalContent: { maskStrategy: faker, options: { method: "sentence" } }
+    subsetStrategy: null
+    subsetOptions: {}
+  payer:
+    columns:
+      info: { maskStrategy: faker, options: { method: "sentence" } }
+      accountNumberForReturns: { maskStrategy: faker, options: { method: "iban" } }
+      streetAddress: { maskStrategy: faker, options: { method: "streetAddress" } }
+      email: { maskStrategy: faker, options: { method: "safeEmail" } }
+      name: { maskStrategy: faker, options: { method: "company" } }
+      phone: { maskStrategy: faker, options: { method: "phoneNumber" } }
+    subsetStrategy: null
+    subsetOptions: {}
+  task:
+    columns:
+      comment: { maskStrategy: faker, options: { method: "sentence" } }
+    subsetStrategy: null
+    subsetOptions: {}
+  transaction:
+    columns:
+      name: { maskStrategy: faker, options: { method: "name" } }
+      notes: { maskStrategy: faker, options: { method: "sentence", arguments: [3, true] } }
+    subsetStrategy: null
+    subsetOptions: {}
+  transaction_import_item:
+    columns:
+      applicant: { maskStrategy: faker, options: { method: "name" } }
+      payer: { maskStrategy: faker, options: { method: "name" } }
+    subsetStrategy: null
+    subsetOptions: {}
+excludes: {}

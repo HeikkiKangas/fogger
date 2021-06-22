@@ -12,6 +12,7 @@ services:
       TARGET_DATABASE_URL: mysql://user:pass@target:3306/target
       RABBITMQ_URL: amqp://user:pass@rabbit:5672
       REDIS_URL: redis://redis
+      FAKER_LOCALE: fi_FI
   worker:
     depends_on:
     - redis
@@ -24,21 +25,31 @@ services:
       TARGET_DATABASE_URL: mysql://user:pass@target:3306/target
       RABBITMQ_URL: amqp://user:pass@rabbit:5672
       REDIS_URL: redis://redis
+      FAKER_LOCALE: fi_FI
     restart: always
-    command: fogger:consumer
+    command: fogger:consumer --messages=50
+
   redis:
     image: redis:4
+
   source:
+    image: mysql:5.7
     environment:
       MYSQL_DATABASE: source
       MYSQL_PASSWORD: pass
       MYSQL_ROOT_PASSWORD: pass
       MYSQL_USER: user
-    image: mysql:5.7
+    expose:
+      - "3306"
+    volumes:
+      - ../dump/lotu-db-prod-20210218.sql:/docker-entrypoint-initdb.d/dump.sql
+
   target:
+    image: mysql:5.7
     environment:
       MYSQL_DATABASE: target
       MYSQL_PASSWORD: pass
       MYSQL_ROOT_PASSWORD: pass
       MYSQL_USER: user
-    image: mysql:5.7
+    expose:
+      - "3306"
